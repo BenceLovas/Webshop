@@ -13,6 +13,8 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.codecool.shop.Utils.parseJson;
+
 public class ProductController {
 
     public static String renderProducts(Request req, Response res) {
@@ -28,5 +30,12 @@ public class ProductController {
 
     private static String renderTemplate(Map model, String template) {
         return new ThymeleafTemplateEngine().render(new ModelAndView(model, template));
+    }
+
+    public static String getProductsByCategory (Request req, Response res) {
+        Map<String, String> idMap = parseJson(req);
+        String categoryId = idMap.get("id");
+        System.out.println(categoryId);
+        return Utils.toJson("lol");
     }
 }
