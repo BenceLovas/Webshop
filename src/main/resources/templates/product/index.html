@@ -41,8 +41,6 @@
         <strong id="categoryTitle" th:text="${category.name}">Category Title</strong>
     </div>
 
-    <button id="changeChategoryContent"> Change content</button>
-
     <div id="products" class="row list-group">
         <div id="productsList" class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
