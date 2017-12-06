@@ -15,34 +15,43 @@
     <script type="text/javascript" src="/js/main.js"></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" />
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 </head>
 
 <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <h1 class="navbar-brand mb-0">Total items</h1>
+        <strong id="total-items">0</strong>
+        <h1 class="navbar-brand mb-0">Total price</h1>
+        <strong id="total-price">0 USD</strong>
+    </nav>
+<br />
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
+<!-- Categories -->
+<ul>
+    <li th:each="category,iterStat:${categories}" ><button th:text="${category.name}" th:id="'category'+${category.id}"></button></li>
+</ul>
 
-<div class="container">
+<!-- Main page -->
+<div class="container" th:each="category:${categories}">
+
     <div class="well well-sm">
         <strong id="categoryTitle" th:text="${category.name}">Category Title</strong>
     </div>
 
-    <div id="products" class="row list-group">
-        <div id="productsList" class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
+    <div id="products" class="row">
+
+        <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${category.getProducts()}" th:if="${category.id == 1}">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="caption">
@@ -53,7 +62,7 @@
                             <p id="productPrice" class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <a class="btn btn-success" th:attr="data-prod_id=${prod.getId()}">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -65,5 +74,6 @@
 
 <div th:replace="footer :: copy"></div>
 
+<script type="text/javascript" src="/script/dom.js"></script>
 </body>
 </html>

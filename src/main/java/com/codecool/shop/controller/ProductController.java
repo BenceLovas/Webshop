@@ -8,9 +8,11 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.google.gson.JsonObject;
 import spark.ModelAndView;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.*;
+
 import spark.Request;
 import spark.Response;
-import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.util.*;
 
@@ -19,19 +21,24 @@ import static com.codecool.shop.Utils.parseJson;
 public class ProductController {
 
     public static String renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        Utils utils = Utils.getInstance();
 
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.find(1));
-        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-
-        Utils utils = Utils.getInstance();
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("order", Order.getCurrentOrder());
         return utils.renderTemplate(params, "product/index");
     }
 
-    private static String renderTemplate(Map model, String template) {
-        return new ThymeleafTemplateEngine().render(new ModelAndView(model, template));
+    public static String handleOrder(Request req, Response res) {
+        Map<String,String> request  = Utils.parseJson(req);
+        Product targetItem = ProductDaoMem.getInstance().find(Integer.parseInt(request.get("productid")));
+        LineItem newLineItem = new LineItem(targetItem, targetItem.getDefaultPrice());
+        Order.getCurrentOrder().add(newLineItem);
+        Map<String, String> response = new HashMap<>();
+        response.put("itemsNumber", Integer.toString(Order.getCurrentOrder().getAddedItems().size()));
+        response.put("totalPrice", Float.toString(Order.getCurrentOrder().getTotalPrice()));
+        return Utils.toJson(response);
     }
 
     public static String getProductsByCategory (Request req, Response res) {
