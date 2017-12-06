@@ -50,14 +50,17 @@ public class Main {
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-
-        ProductCategory computer = new ProductCategory("PC computer", "Hardware", "Regular PC for gaming");
+        ProductCategory computer = new ProductCategory("Laptop", "Hardware", "Portable computers for universal porpoises");
 
         //setting up products and printing it
         new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon);
         new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo);
         new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon);
-        
+
+        new Product("Laptop1", 8000, "USD", "Op", computer, lenovo);
+        new Product("Laptop2", 6000, "USD", "E.Z.", computer, lenovo);
+        new Product("Laptop3", 7000, "USD", "Lofasz", computer, lenovo);
+
     }
 
 }

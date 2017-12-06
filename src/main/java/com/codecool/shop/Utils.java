@@ -7,6 +7,7 @@ import spark.Request;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
@@ -32,6 +33,10 @@ public class Utils {
     public static String toJson(Object object) {
         Gson gson = new Gson();
         return gson.toJson(object);
+    }
+
+    public void toJsonFromMap (HashMap<String, String> map) {
+
     }
 
     public static String renderTemplate(Map model, String template) {
