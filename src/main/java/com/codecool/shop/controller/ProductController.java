@@ -7,6 +7,10 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.*;
+import com.google.gson.JsonObject;
+import spark.ModelAndView;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.*;
 import spark.Request;
 import spark.Response;
 
@@ -23,8 +27,9 @@ public class ProductController {
         Utils utils = Utils.getInstance();
 
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.find(1));
-        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("order", Order.getCurrentOrder());
         return utils.renderTemplate(params, "product/index");
     }
 
