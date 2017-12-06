@@ -16,6 +16,26 @@ $(function() {
         }});
     });
 
+    function addCategoryButtonEventListeners () {
+        $('.categoryChooser').click(function(){
+            let categoryId =  this.id
+            console.log(categoryId)
+            let data = {"id": categoryId.substring(categoryId.length - 1)};
+            $.ajax({
+                url: "/product",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function(result){
+                    var category = result.category;
+                    var productList = result.products;
+                    populateHtmlWithProducts(productList);
+
+                }});
+        });
+    }
+
     function populateHtmlWithProducts (productlist) {
             $("#products").empty();
             for (var i = 0; i < productlist.length; i++) {
@@ -42,4 +62,6 @@ $(function() {
                 )
             }
         };
+
+    addCategoryButtonEventListeners ();
 });

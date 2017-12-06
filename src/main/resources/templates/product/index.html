@@ -37,9 +37,11 @@
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
+
 <!-- Categories -->
+
 <ul>
-    <li th:each="category,iterStat:${categories}" ><button th:text="${category.name}" th:id="'category'+${category.id}"></button></li>
+    <li th:each="category,iterStat:${categories}" ><button class="categoryChooser" th:text="${category.name}" th:id="'category'+${category.id}"></button></li>
 </ul>
 
 <!-- Main page -->
