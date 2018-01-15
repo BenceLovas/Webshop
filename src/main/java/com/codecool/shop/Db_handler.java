@@ -143,7 +143,7 @@ public class Db_handler {
      * Fills the PreparedStatementFields's for adding ProductCategory to DB.
      * @param productCategory ProductCategory object which needs to be added to DB.
      * @param prepStatement PreparedStatement object to be filled with data from productCategory object.
-     * @throws SQLException if the number of fields in PreparedStatement doesn't match the number of arguments to be filled.
+     * @throws SQLException if the type of fields in PreparedStatement doesn't match the type of arguments to be filled.
      */
     private void fillPreparedStatementFields(ProductCategory productCategory, PreparedStatement prepStatement) throws SQLException {
         prepStatement.setInt(1, productCategory.getId());
@@ -156,7 +156,7 @@ public class Db_handler {
      * Fills the PreparedStatement's fields for adding Supplier to DB.
      * @param supplier Supplier object which needs to be added to DB.
      * @param prepStatement PreparedStatement object to be filled with data from supplier object.
-     @throws SQLException if the number of fields in PreparedStatement doesn't match the number of arguments to be filled.
+     @throws SQLException if the type of fields in PreparedStatement doesn't match the type of arguments to be filled.
      */
     private void fillPreparedStatementFields(Supplier supplier, PreparedStatement prepStatement) throws SQLException {
         prepStatement.setInt(1, supplier.getId());
@@ -168,7 +168,7 @@ public class Db_handler {
      * Fills the PreparedStatement's fields for adding Product to DB.
      * @param product Product object which needs to be added to DB.
      * @param prepStatement PreparedStatement object to be filled with data from Product object.
-     @throws SQLException if the number of fields in PreparedStatement doesn't match the number of arguments to be filled.
+     @throws SQLException if the type of fields in PreparedStatement doesn't match the type of arguments to be filled.
      */
     private void fillPreparedStatementFields(Product product, PreparedStatement prepStatement) throws SQLException {
         prepStatement.setInt(1, product.getId());
