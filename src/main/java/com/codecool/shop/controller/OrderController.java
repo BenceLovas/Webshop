@@ -217,7 +217,7 @@ public class OrderController {
         List<Map> orders = ModelBuilder.lineItemModel(orderItems);
         Map<String, Object> response = new HashMap<>();
         response.put("itemsNumber", Integer.toString(Order.getActiveOrder(userId).getTotalSize()));
-        response.put("totalPrice", Float.toString(Order.getActiveOrder(userId).getTotalPrice()));
+        response.put("totalPrice", Float.toString((float) Math.round(Order.getActiveOrder(userId).getTotalPrice() * 100) / 100));
         response.put("shoppingCart", orders);
 
         LOGGER.debug("Response with shopping cart data: {}", response);

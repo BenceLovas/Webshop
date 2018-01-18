@@ -47,13 +47,13 @@ $(document).ready(function () {
         },
 
         sortBySupplier: function (event) {
-            let id = $(event.target).attr("id");
+            let id = $(event.currentTarget).attr("id");
             id = id.replace('supplier', '');
             ajax.getSupplierProducts(id, responseHandler.updateProducts);
         },
 
         sortByCategory: function (event) {
-            let id = $(event.target).attr("id");
+            let id = $(event.currentTarget).attr("id");
             id = id.replace('category', '');
             ajax.getCategoryProducts(id, responseHandler.updateProducts);
         },
@@ -400,7 +400,7 @@ $(document).ready(function () {
             let wrapper = $('<div/>', {"class": "thumbnail"});
             let image = $('<img/>', {
                 "class": "group list-group-image",
-                src: "/img/product_" + id + ".jpg",
+                src: "/img/default-placeholder-300x300.png",
             });
             let innerWrapper = $('<div/>', {"class": "caption"});
             let productName = $('<h4/>', {"class": "group inner list-group-item-heading"}).text(name);
@@ -463,18 +463,27 @@ $(document).ready(function () {
         },
 
         initializePaymentPage: function () {
+            let div = $('<div/>', {"class": "container"});
+            let row1 = $('<div/>', {
+                "class": "row justify-content-start"
+            });
             let paymentOptionText = $('<p/>', {"class": "offset-1"}).text("Please choose your payment method of choice!");
+            let row2 = $('<div/>', {
+                "class": "row justify-content-start"
+            });
             let creditCardPaymentOptionButton = $('<button/>', {
                 id: "creditCardPaymentOption",
-                "class": "btn btn-primary col-4 offset-1"
+                "class": "btn btn-primary col-3"
             })
                 .text("Credit Card");
-            let payPalPaymentOptionButton = $('<button/>', {id: "payPalPaymentOption", "class": "btn btn-primary col-4 offset-1"})
+            let payPalPaymentOptionButton = $('<button/>', {id: "payPalPaymentOption", "class": "btn btn-primary col-3"})
                 .text("Pay Pal");
+            row1.append(paymentOptionText);
+            row2.append(creditCardPaymentOptionButton).append(payPalPaymentOptionButton);
+            // div.append(row1).append(row2);
             $('#cart').empty()
-                .append(paymentOptionText)
-                .append(creditCardPaymentOptionButton)
-                .append(payPalPaymentOptionButton);
+                .append(row1)
+                .append(row2);
             eventApplier.addEventToCreditCardPaymentOptionButton();
             eventApplier.addEventToPayPalPaymentOptionButton()
         },

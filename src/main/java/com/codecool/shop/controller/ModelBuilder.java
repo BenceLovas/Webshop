@@ -43,7 +43,7 @@ public class ModelBuilder {
             Map<String, String> currentLineItem = new HashMap<>();
             currentLineItem.put("name", lineItem.getItem().getName());
             currentLineItem.put("quantity", Integer.toString(lineItem.getQuantity()));
-            currentLineItem.put("price", Float.toString(lineItem.getItemPriceSum()));
+            currentLineItem.put("price", Float.toString((float) Math.round(lineItem.getItemPriceSum() * 100) / 100));
             currentLineItem.put("prodId", Integer.toString(lineItem.getItem().getId()));
             model.add(currentLineItem);
         }

@@ -10,6 +10,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -23,12 +24,18 @@
 <body>
     <div class="container-fluid">
         <div class="wrapper">
+            <div id="main" class="row justify-content-center">
+                <img id="navLogo" src="/img/lava_logo.png" alt="logo" />
+            </div>
             <div class="row justify-content-center">
-                <p class="col-6 danger" th:text="${message}"></p>
+                <p id="logoText">WEBSHOP</p>
+            </div>
+            <div class="row justify-content-center">
+                <p class="col-4 danger" th:text="${message}"></p>
             </div>
             <form action="/api/user/registration" method="POST">
                 <div class="row justify-content-center align-self-center">
-                    <div class="col-6">
+                    <div class="col-4">
                         <input class="col-12" type="text" name="name" placeholder="Username" required="required" pattern=".{3,}" title="Name must be at least 3 letters." />
                         <input class="col-12" type="email" name="email" placeholder="E-mail Address" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
                         <input class="col-12" type="password" name="password" placeholder="Password" required="required" pattern=".{6,}" title="Password must be at least 6 letters." />
@@ -38,7 +45,7 @@
             </form>
             <form action="/api/user/login" method="POST">
                 <div class="row justify-content-center">
-                    <div class="col-6">
+                    <div class="col-4">
                         <input class="col-12" type="text" name="name" placeholder="Username" required="required" pattern=".{3,}" title="Name must be at least 3 letters." />
                         <input class="col-12" type="password" name="password" required="required" placeholder="Password" pattern=".{6,}" title="Password must be at least 6 letters." />
                         <button type="submit" class="btn btn-primary col-12">Log In</button>

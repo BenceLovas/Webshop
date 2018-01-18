@@ -41,7 +41,8 @@ public class UserDaoJdbc implements UserDao {
             statement.setString(3, user.getPassword());
             ConnectionDetails connectionDetails = new ConnectionDetails(connection, statement);
             CachedRowSet result = db_handler.fetchQuery(connectionDetails);
-            if (result.next()) {
+            if (result != null) {
+                result.next();
                 Integer id = result.getInt("id");
                 return id;
             }
